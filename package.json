@@ -1,0 +1,14 @@
+{
+  "name": "mbot",
+  "version": "1.0.0",
+  "description": "MacAfee COD Bot",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "twitter": "^1.7.1"
+  }
+}
