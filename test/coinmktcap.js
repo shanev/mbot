@@ -2,15 +2,13 @@ const assert = require('assert');
 const CoinMktCapApi = require('../coinmktcap');
 
 describe('CoinMarketCap API', () => {
-  it('BTC should be listed', async () => {
-    assert(await CoinMktCapApi.isListed('BTC'));
-  });
+  describe('findBySymbol', () => {
+    it('should find ticker id for BTC', async () => {
+      assert.equal(await CoinMktCapApi.findTickerIdBySymbol('BTC'), 'bitcoin');
+    });
 
-  it('ETH should be listed', async () => {
-    assert(await CoinMktCapApi.isListed('ETH'));
-  });
-
-  it('SHANE should not be listed', async () => {
-    assert(await CoinMktCapApi.isListed('SHANE') == false);
+    it('should not find ticker id for SHANE', async () => {
+      assert.equal(await CoinMktCapApi.findTickerIdBySymbol('SHANE'), null);
+    });
   });
 });

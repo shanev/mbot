@@ -19,9 +19,11 @@ client.stream('statuses/filter', {follow: '961445378'}, function(stream) {
       if (match != null) {
         const symbol = match[0];
         console.log('Found ${symbol}.');
-        const isListed = await CoinMktCapApi.isListed('ETH');
-        if (isListed == true) {
-          console.log('${symbol} is listed on CoinMarketCap.');
+        const tickerId = await CoinMktCapApi.findTickerIdBySymbol(symbol);
+        if (tickerId != null) {
+          console.log('https://coinmarketcap.com/currencies/${tickerId}/');
+        } else {
+          console.log('Not listed on CoinMarketCap.');
         }
       }
     }
