@@ -4,6 +4,7 @@
   "description": "McAfee COD Bot",
   "main": "tweets.js",
   "scripts": {
+    "start": "node tweets.js",
     "test": "mocha"
   },
   "author": "",
