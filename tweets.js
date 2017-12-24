@@ -1,7 +1,8 @@
 require('dotenv').config();
 
-const axios = require("axios");
+const axios = require('axios');
 const Twitter = require('twitter');
+const CoinMktCapApi = require('./coinmktcap');
 
 const client = new Twitter({
   consumer_key: process.env.TWITTER_CONSUMER_KEY,
@@ -11,13 +12,17 @@ const client = new Twitter({
 });
 
 client.stream('statuses/filter', {follow: '961445378'}, function(stream) {
-  stream.on('data', function(tweet) {
+  stream.on('data', async function(tweet) {
     if (isReply(tweet) == false) {
       console.log(tweet.text);
       const match = tweet.match(/[A-Z0-9]{3,5}/);
       if (match != null) {
         const symbol = match[0];
-        console.log('Found ${symbol}.')
+        console.log('Found ${symbol}.');
+        const isListed = await CoinMktCapApi.isListed('ETH');
+        if (isListed == true) {
+          console.log('${symbol} is listed on CoinMarketCap.');
+        }
       }
     }
   });
