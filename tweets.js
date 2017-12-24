@@ -19,6 +19,26 @@ client.stream('statuses/filter', {follow: '961445378'},  function(stream) {
       if (match != null) {
         const symbol = match[0];
         console.log('Found ${symbol}.')
+        // search coinmarketcap, find symbol
+        // https://api.coinmarketcap.com/v1/ticker/?limit=0
+        // [
+        //     {
+        //         "id": "bitcoin", 
+        //         "name": "Bitcoin", 
+        //         "symbol": "BTC", 
+        //         "rank": "1", 
+        //         "price_usd": "13767.0", 
+        //         "price_btc": "1.0", 
+        //         "24h_volume_usd": "12892600000.0", 
+        //         "market_cap_usd": "230729578404", 
+        //         "available_supply": "16759612.0", 
+        //         "total_supply": "16759612.0", 
+        //         "max_supply": "21000000.0", 
+        //         "percent_change_1h": "-2.67", 
+        //         "percent_change_24h": "-4.78", 
+        //         "percent_change_7d": "-29.21", 
+        //         "last_updated": "1514084956"
+        //     }, 
       }
     }
   });
