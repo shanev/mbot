@@ -4,12 +4,13 @@
   "description": "McAfee COD Bot",
   "main": "index.js",
   "scripts": {
-    "test": "node test/tweets.js"
+    "test": "mocha"
   },
   "author": "",
   "license": "MIT",
   "dependencies": {
     "dotenv": "^4.0.0",
+    "mocha": "^4.0.1",
     "twitter": "^1.7.1"
   }
 }
