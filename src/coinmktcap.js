@@ -7,7 +7,7 @@ class CoinMktCapApi {
       const response = await axios.get(url);
       const data = response.data;
       for (var item of data) {
-        if (item.symbol == symbol) {
+        if (item.symbol === symbol) {
           return item.id;
         } else {
           return null;
