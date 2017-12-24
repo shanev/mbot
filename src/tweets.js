@@ -11,8 +11,8 @@ const client = new Twitter({
   access_token_secret: process.env.TWITTER_ACCESS_TOKEN_SECRET
 });
 
-client.stream('statuses/filter', {follow: '961445378'}, function(stream) {
-  stream.on('data', async function(tweet) {
+client.stream('statuses/filter', {follow: '961445378'}, (stream) => {
+  stream.on('data', async (tweet) => {
     if (isReply(tweet) == false) {
       console.log(tweet.text);
       const match = tweet.match(/[A-Z0-9]{3,5}/);
@@ -29,7 +29,7 @@ client.stream('statuses/filter', {follow: '961445378'}, function(stream) {
     }
   });
 
-  stream.on('error', function(error) {
+  stream.on('error', (error) => {
     console.log(error);
   });
 });
