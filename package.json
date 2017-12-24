@@ -2,9 +2,9 @@
   "name": "mbot",
   "version": "1.0.0",
   "description": "McAfee COD Bot",
-  "main": "tweets.js",
+  "main": "src/tweets.js",
   "scripts": {
-    "start": "node tweets.js",
+    "start": "node src/tweets.js",
     "test": "mocha"
   },
   "author": "",

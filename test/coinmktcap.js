@@ -1,5 +1,5 @@
 const assert = require('assert');
-const CoinMktCapApi = require('../coinmktcap');
+const CoinMktCapApi = require('../src/coinmktcap');
 
 describe('CoinMarketCap API', () => {
   describe('findBySymbol', () => {
