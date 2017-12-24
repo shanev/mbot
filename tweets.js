@@ -18,10 +18,10 @@ client.stream('statuses/filter', {follow: '961445378'}, function(stream) {
       const match = tweet.match(/[A-Z0-9]{3,5}/);
       if (match != null) {
         const symbol = match[0];
-        console.log('Found ${symbol}.');
+        console.log('McAfee mentioned ${symbol}.');
         const tickerId = await CoinMktCapApi.findTickerIdBySymbol(symbol);
         if (tickerId != null) {
-          console.log('https://coinmarketcap.com/currencies/${tickerId}/');
+          console.log('https://coinmarketcap.com/currencies/${tickerId}');
         } else {
           console.log('Not listed on CoinMarketCap.');
         }

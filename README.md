@@ -21,3 +21,10 @@ TWITTER_ACCESS_TOKEN_SECRET=xxx
 ## Run
 
 `npm start`
+
+## Output
+
+```
+McAfee mentioned BTC.
+https://coinmarketcap.com/currencies/bitcoin
+```
