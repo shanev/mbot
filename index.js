@@ -16,7 +16,7 @@ client.stream('statuses/filter', {follow: '961445378'},  function(stream) {
     if (isReply(tweet) == false) {
       console.log('REAL ' + tweet.text);
     } else {
-      console.log('REPLY ' + tweet.text);
+      // console.log('REPLY ' + tweet.text);
     }
   });
 
