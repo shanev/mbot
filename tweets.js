@@ -14,9 +14,12 @@ var client = new Twitter({
 client.stream('statuses/filter', {follow: '961445378'},  function(stream) {
   stream.on('data', function(tweet) {
     if (isReply(tweet) == false) {
-      console.log('REAL ' + tweet.text);
-    } else {
-      // console.log('REPLY ' + tweet.text);
+      console.log(tweet.text);
+      const match = tweet.match(/[A-Z0-9]{3,5}/);
+      if (match != null) {
+        const symbol = match[0];
+        console.log('Found ${symbol}.')
+      }
     }
   });
 
