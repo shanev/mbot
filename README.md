@@ -3,7 +3,7 @@
 ## Install
 
 ```
-git clone https://github.com/shanev/mbot
+git clone https://github.com/shanev/mbot.git
 cd mbot && npm install
 ```
 
