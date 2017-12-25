@@ -9,13 +9,15 @@ cd mbot && npm install
 
 ## Setup
 
-Add a .env file with Twitter credentials
+Add a .env file with API keys
 
 ```
 TWITTER_CONSUMER_KEY=xxx
 TWITTER_CONSUMER_SECRET=xxx
 TWITTER_ACCESS_TOKEN_KEY=xxx
 TWITTER_ACCESS_TOKEN_SECRET=xxx
+BITTREX_API_KEY=xxx
+BITTREX_API_SECRET=xxx
 ```
 
 ## Run
