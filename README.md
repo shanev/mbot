@@ -22,7 +22,7 @@ BITTREX_API_SECRET=xxx
 
 ## Run
 
-Buy $100 USD of tweeted symbol on Bittrex.
+Buy $100 USD of tweeted symbol on Bittrex. Make sure you have sufficient BTC or ETH for the trade. If a coin has both BTC and ETH markets, it uses the BTC market.
 
 `npm start 100.00`
 
