@@ -3,6 +3,7 @@ require('dotenv').config();
 const axios = require('axios');
 const Twitter = require('twitter');
 const CoinMktCapApi = require('./coinmktcap');
+const Bittrex = require('./bittrex');
 
 const client = new Twitter({
   consumer_key: process.env.TWITTER_CONSUMER_KEY,
@@ -22,6 +23,7 @@ client.stream('statuses/filter', {follow: '961445378'}, (stream) => {
         const tickerId = await CoinMktCapApi.findTickerIdBySymbol(symbol);
         if (tickerId != null) {
           console.log('https://coinmarketcap.com/currencies/${tickerId}');
+          await Bittrex.buy(symbol, 100.00); // buy $100 USD
         } else {
           console.log('Not listed on CoinMarketCap.');
         }
