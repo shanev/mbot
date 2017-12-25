@@ -8,7 +8,7 @@ bittrex.options({
 });
 
 const symbol = 'OMG';
-const tradePrice = 100.00; // in USD
+const tradePrice = parseFloat('10.00'); // in USD
 
 bittrex.getmarkets((data, err) => {
   if (err) {

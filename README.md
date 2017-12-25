@@ -22,7 +22,9 @@ BITTREX_API_SECRET=xxx
 
 ## Run
 
-`npm start`
+Buy $100 USD of tweeted symbol on Bittrex.
+
+`npm start 100.00`
 
 ## Output
 
