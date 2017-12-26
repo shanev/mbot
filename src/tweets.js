@@ -23,7 +23,7 @@ client.stream('statuses/filter', {follow: '961445378'}, (stream) => {
   stream.on('data', async (tweet) => {
     const symbol = coinOfTheDay(tweet);
     if (symbol != null) {
-      console.log('McAfee mentioned ${symbol}.');
+      console.log('Coin of the day: ${symbol}.');
       const tickerId = await CoinMktCapApi.findTickerIdBySymbol(symbol);
       if (tickerId != null) {
         console.log('https://coinmarketcap.com/currencies/${tickerId}');
