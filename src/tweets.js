@@ -21,20 +21,16 @@ if (tradePrice == undefined) {
 
 client.stream('statuses/filter', {follow: '961445378'}, (stream) => {
   stream.on('data', async (tweet) => {
-    if (isReply(tweet) == false) {
-      console.log(tweet.text);
-      const match = tweet.match(/[A-Z0-9]{3,5}/);
-      if (match != null) {
-        const symbol = match[0];
-        console.log('McAfee mentioned ${symbol}.');
-        const tickerId = await CoinMktCapApi.findTickerIdBySymbol(symbol);
-        if (tickerId != null) {
-          console.log('https://coinmarketcap.com/currencies/${tickerId}');
-          await Bittrex.buy(symbol, parseFloat(tradePice));
-        } else {
-          console.log('Not listed on CoinMarketCap.');
-        }
-      }
+    const symbol = coinOfTheDay(tweet);
+    if (symbol != null) {
+      console.log('McAfee mentioned ${symbol}.');
+      const tickerId = await CoinMktCapApi.findTickerIdBySymbol(symbol);
+      if (tickerId != null) {
+        console.log('https://coinmarketcap.com/currencies/${tickerId}');
+        await Bittrex.buy(symbol, parseFloat(tradePice));
+      } else {
+        console.log('Not listed on CoinMarketCap.');
+      }      
     }
   });
 
@@ -43,6 +39,26 @@ client.stream('statuses/filter', {follow: '961445378'}, (stream) => {
   });
 });
 
+// Coin of the day, or null
+function coinOfTheDay(tweet) {
+  if (isReply(tweet) == false) {
+    console.log(tweet.text);
+    const lowercaseTweet = tweet.text.toLowerCase();
+    if (lowercaseTweet.includes('coin of the day')) {
+      const match = tweet.text.match(/[A-Z0-9]{3,5}/);
+      if (match != null) {
+        return match[0];
+      } else {
+        return null;
+      }
+    } else {
+      return null;
+    }
+  }
+  return null;
+}
+
+// Filter out reply tweets
 function isReply(tweet) {
   if ( tweet.retweeted_status
     || tweet.in_reply_to_status_id
@@ -54,3 +70,5 @@ function isReply(tweet) {
   }
   return false;
 }
+
+module.exports = { coinOfTheDay };

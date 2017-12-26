@@ -1,7 +1,14 @@
-var assert = require('assert');
+const assert = require('assert');
+const Tweets = require('../src/tweets');
 
 describe('Tweet', () => {
   const re = /[A-Z0-9]{3,5}/;
+
+  it('should find WWW symbol in tweet', () => {
+    const tweet = { text: 'Coin of the day: WWW' };
+    const symbol = Tweets.coinOfTheDay(tweet);
+    assert.equal(symbol, 'WWW');
+  });
 
   it('should find DGB symbol in tweet', () => {
     const tweet = 'Coin of the day: Digibyte (DGB). Using a Blockchain which is 40 times faster than Bitcoin and having one of the most decentralized mining systems in the world - based on 5 different synergistic algorithms. DGB adherents call the coin "The Sleeping Giant".';
