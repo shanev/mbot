@@ -12,12 +12,12 @@ const client = new Twitter({
   access_token_secret: process.env.TWITTER_ACCESS_TOKEN_SECRET
 });
 
-if (process.argv[2] == undefined) {
+const tradePrice = process.env.TRADE_PRICE || process.argv[2];
+
+if (tradePrice == undefined) {
   console.log('Missing argument: trade price.');
   process.exit();
 }
-
-const tradePrice = parseFloat(process.argv[2]); // in USD
 
 client.stream('statuses/filter', {follow: '961445378'}, (stream) => {
   stream.on('data', async (tweet) => {
@@ -30,7 +30,7 @@ client.stream('statuses/filter', {follow: '961445378'}, (stream) => {
         const tickerId = await CoinMktCapApi.findTickerIdBySymbol(symbol);
         if (tickerId != null) {
           console.log('https://coinmarketcap.com/currencies/${tickerId}');
-          await Bittrex.buy(symbol, tradePice);
+          await Bittrex.buy(symbol, parseFloat(tradePice));
         } else {
           console.log('Not listed on CoinMarketCap.');
         }
