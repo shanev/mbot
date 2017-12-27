@@ -2,6 +2,10 @@
 
 Retrieves the coinmarketcap.com URL for McAfee's 'Coin of the Day', and buys it on Bittrex.
 
+## **WARNING**
+
+**This tool trades with real money. The author is not responsible for any irresponsible usage. Run this in a secure environment to prevent exchange keys from being compromised.**
+
 ## Install
 
 ```
