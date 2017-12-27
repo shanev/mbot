@@ -1,5 +1,7 @@
 # McAfee 'Coin of the Day' Bot
 
+Retrieves the coinmarketcap.com URL for McAfee's 'Coin of the Day', and buys it on Bittrex.
+
 ## Install
 
 ```
@@ -9,7 +11,7 @@ cd mbot && npm install
 
 ## Setup
 
-Add a .env file with API keys
+Add a .env file with API keys:
 
 ```
 TWITTER_CONSUMER_KEY=xxx
