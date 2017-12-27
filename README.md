@@ -4,7 +4,7 @@ Retrieves the coinmarketcap.com URL for McAfee's 'Coin of the Day', and buys it 
 
 ## **WARNING**
 
-**This tool trades with real money. The author is not responsible for any irresponsible usage. Run this in a secure environment to prevent exchange keys from being compromised.**
+**This tool trades with real money. The author is not responsible for irresponsible usage. Run in a secure environment to prevent exchange keys from being compromised.**
 
 ## Install
 
@@ -15,7 +15,7 @@ cd mbot && npm install
 
 ## Setup
 
-Add a .env file with API keys:
+Add a .env file with API keys. Bittrex permissions have to be set to _trade limit_ under Settings -> API Keys.
 
 ```
 TWITTER_CONSUMER_KEY=xxx
