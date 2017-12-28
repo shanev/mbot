@@ -21,16 +21,20 @@ if (tradePrice == undefined) {
 
 client.stream('statuses/filter', {follow: '961445378'}, (stream) => {
   stream.on('data', async (tweet) => {
-    const symbol = coinOfTheDay(tweet);
-    if (symbol != null) {
-      console.log('Coin of the day: ${symbol}.');
-      const tickerId = await CoinMktCapApi.findTickerIdBySymbol(symbol);
-      if (tickerId != null) {
-        console.log('https://coinmarketcap.com/currencies/${tickerId}');
-        await Bittrex.buy(symbol, parseFloat(tradePice));
-      } else {
-        console.log('Not listed on CoinMarketCap.');
-      }      
+    if (coinOfTheWeek(tweet) == true) {
+      const imageUrl = imageUrl(tweet);
+      // const imageText = 
+      if (symbol != null) {
+        console.log('Coin of the day: ${symbol}.');
+        const tickerId = await CoinMktCapApi.findTickerIdBySymbol(symbol);
+        if (tickerId != null) {
+          console.log('https://coinmarketcap.com/currencies/${tickerId}');
+          await Bittrex.buy(symbol, parseFloat(tradePice));
+        } else {
+          console.log('Not listed on CoinMarketCap.');
+        }      
+      }
+
     }
   });
 
@@ -39,23 +43,24 @@ client.stream('statuses/filter', {follow: '961445378'}, (stream) => {
   });
 });
 
-// Coin of the day, or null
-function coinOfTheDay(tweet) {
+function imageUrl(tweet) {
+  const media = tweet.entities.media;
+  if (media.length > 0) {
+    return media[0].media_url;
+  } else {
+    return null;
+  }
+}
+
+function coinOfTheWeek(tweet) {
   if (isReply(tweet) == false) {
     console.log(tweet.text);
     const lowercaseTweet = tweet.text.toLowerCase();
-    if (lowercaseTweet.includes('coin of the day')) {
-      const match = tweet.text.match(/[A-Z0-9]{3,5}/);
-      if (match != null) {
-        return match[0];
-      } else {
-        return null;
-      }
-    } else {
-      return null;
+    if (lowercaseTweet.includes('coin of the week')) {
+      return true;
     }
   }
-  return null;
+  return false;
 }
 
 // Filter out reply tweets
@@ -71,4 +76,4 @@ function isReply(tweet) {
   return false;
 }
 
-module.exports = { coinOfTheDay };
+module.exports = { coinOfTheWeek, imageUrl };
