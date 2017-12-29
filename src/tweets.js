@@ -19,6 +19,14 @@ if (tradePrice == undefined) {
   process.exit();
 }
 
+// client.get('statuses/show', { id: '945655402276024320' }, (error, tweet) => {
+//   if (!error) {
+//     console.log(tweet.entities);
+//   } else {
+//     console.error(error);
+//   }
+// });
+
 client.stream('statuses/filter', {follow: '961445378'}, (stream) => {
   stream.on('data', async (tweet) => {
     if (coinOfTheWeek(tweet) == true) {
