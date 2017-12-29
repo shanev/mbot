@@ -1,6 +1,6 @@
-# McAfee 'Coin of the Day' Bot
+# McAfee 'Coin of the Week' Bot
 
-Retrieves the coinmarketcap.com URL for McAfee's 'Coin of the Day', and buys it on Bittrex.
+Retrieves the coinmarketcap.com URL for McAfee's 'Coin of the Week', and buys it on Bittrex.
 
 ## **WARNING**
 
@@ -15,7 +15,7 @@ cd mbot && npm install
 
 ## Setup
 
-Add a .env file with API keys. Bittrex permissions have to be set to _trade limit_ under Settings -> API Keys.
+Add a .env file with API keys. Bittrex permissions have to be set to _trade limit_ under Settings -> API Keys. Google [credentials](https://cloud.google.com/docs/authentication/getting-started) are needed to do OCR on the tweet using Google's Cloud Vision API.
 
 ```
 TWITTER_CONSUMER_KEY=xxx
@@ -24,6 +24,7 @@ TWITTER_ACCESS_TOKEN_KEY=xxx
 TWITTER_ACCESS_TOKEN_SECRET=xxx
 BITTREX_API_KEY=xxx
 BITTREX_API_SECRET=xxx
+GOOGLE_APPLICATION_CREDENTIALS=xxx
 ```
 
 ## Run
