@@ -1,9 +1,9 @@
 require('dotenv').config();
 
-const axios = require('axios');
 const Twitter = require('twitter');
 const CoinMktCapApi = require('./coinmktcap');
 const Bittrex = require('./bittrex');
+const Vision = require('./vision');
 
 const client = new Twitter({
   consumer_key: process.env.TWITTER_CONSUMER_KEY,
@@ -23,9 +23,10 @@ client.stream('statuses/filter', {follow: '961445378'}, (stream) => {
   stream.on('data', async (tweet) => {
     if (coinOfTheWeek(tweet) == true) {
       const imageUrl = imageUrl(tweet);
-      // const imageText = 
+      const vision = new Vision(imageUrl);
+      const symbol = await vision.detectSymbol();
       if (symbol != null) {
-        console.log('Coin of the day: ${symbol}.');
+        console.log('Coin of the week: ${symbol}.');
         const tickerId = await CoinMktCapApi.findTickerIdBySymbol(symbol);
         if (tickerId != null) {
           console.log('https://coinmarketcap.com/currencies/${tickerId}');
