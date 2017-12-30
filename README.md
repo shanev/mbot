@@ -1,6 +1,6 @@
 # McAfee 'Coin of the Week' Bot
 
-MBot retrieves the symbol and coinmarketcap.com URL for [@officialmcafee](https://twitter.com/officialmcafee)'s 'Coin of the Week', and automatically buys it on an exchange, currently only Bittrex. It uses OCR to extract the coin information from the image embedded in McAfee's tweet.
+MBot retrieves the symbol and coinmarketcap.com URL for [@officialmcafee's](https://twitter.com/officialmcafee) 'Coin of the Week', and automatically buys it on an exchange, currently only Bittrex. It uses OCR to extract the coin information from the image embedded in McAfee's tweet.
 
 ## **WARNING**
 
