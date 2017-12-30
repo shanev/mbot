@@ -15,9 +15,8 @@ class CoinMktCapApi {
       return getCoinId(data, symbol);
     } catch (error) {
       console.error(error);
-      return getCoinId(dataCache, symbol);
     }
-    return null;
+    return getCoinId(dataCache, symbol);
   }
 }
 
