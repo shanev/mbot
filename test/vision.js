@@ -8,6 +8,6 @@ describe('Vision', () => {
   describe('detectSymbol', () => {
     it('should detect symbol', async () => {
       assert.equal(await vision.detectSymbol(), 'TRON');
-    }).timeout(5000);
+    }).timeout(10000);
   });
 });

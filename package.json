@@ -5,7 +5,7 @@
   "main": "src/tweets.js",
   "scripts": {
     "start": "node src/tweets.js",
-    "test": "NODE_ENV=test mocha"
+    "test": "NODE_ENV=test mocha --exit"
   },
   "author": "",
   "license": "MIT",
