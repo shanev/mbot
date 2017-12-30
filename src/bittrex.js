@@ -35,7 +35,7 @@ class Bittrex {
           Target: 0, // used in conjunction with ConditionType
         }, (data, err) => {
           if (err != null) {
-            console.log(err);
+            console.error(err);
           }
           console.log(data);
         });

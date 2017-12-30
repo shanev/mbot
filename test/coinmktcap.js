@@ -2,7 +2,7 @@ const assert = require('assert');
 const CoinMktCapApi = require('../src/coinmktcap');
 
 describe('CoinMarketCap API', () => {
-  describe('findBySymbol', () => {
+  describe('findTickerIdBySymbol', () => {
     it('should find ticker id for BTC', async () => {
       assert.equal(await CoinMktCapApi.findTickerIdBySymbol('BTC'), 'bitcoin');
     }).timeout(5000);
