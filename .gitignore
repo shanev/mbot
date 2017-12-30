@@ -57,3 +57,6 @@ typings/
 
 # dotenv environment variables file
 .env
+
+# Google API keyfile
+mbot-keyfile.json
