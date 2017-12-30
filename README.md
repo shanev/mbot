@@ -15,7 +15,7 @@ cd mbot && npm install
 
 ## Setup
 
-Add a .env file with API keys. Bittrex permissions have to be set to _trade limit_ under Settings -> API Keys. Google [credentials](https://cloud.google.com/docs/authentication/getting-started) are needed to do OCR on the tweet using Google's Cloud Vision API.
+Add a .env file with API keys. Bittrex permissions have to be set to _trade limit_ under Settings -> API Keys. Google [credentials](https://cloud.google.com/docs/authentication/getting-started) are needed to do OCR on the tweet using Google's Cloud Vision API. Base64 encode the keyfile into `GOOGLE_API_KEY_ENCODED`.
 
 ```
 TWITTER_CONSUMER_KEY=xxx
@@ -24,7 +24,7 @@ TWITTER_ACCESS_TOKEN_KEY=xxx
 TWITTER_ACCESS_TOKEN_SECRET=xxx
 BITTREX_API_KEY=xxx
 BITTREX_API_SECRET=xxx
-GOOGLE_APPLICATION_CREDENTIALS=xxx
+GOOGLE_API_KEY_ENCODED=xxx
 ```
 
 ## Run

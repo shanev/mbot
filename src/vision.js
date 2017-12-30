@@ -1,8 +1,19 @@
-// Imports the Google Cloud client library
+const fs = require('fs');
 const vision = require('@google-cloud/vision');
 
+// Hack around Google API's requirement of having a locally stored API keyfile.
+// Store encoded version in environment variable, then decode that to a local file.
+const googleKey = Buffer.from(process.env.GOOGLE_API_KEY_ENCODED, 'base64').toString('ascii');
+const keyFilename = 'mbot-keyfile.json';
+fs.writeFile(keyFilename, googleKey, (err) => {
+  if (err) {
+    console.error(err);
+  }
+  console.log('Wrote keyfile!');
+});
+
 // Creates a client
-const client = new vision.ImageAnnotatorClient();
+const client = new vision.ImageAnnotatorClient({ keyFilename });
 
 class Vision {
   constructor(imageUri) {
