@@ -40,9 +40,10 @@ describe('Tweets', () => {
     it('should emit a symbol', () => {
       const coinEmitter = Tweets.coinEmitter;
       coinEmitter.on('data', (coin) => {
-        assert.equal(coin, 'TEST');
+        assert.equal(coin.symbol, 'ETH');
+        assert.equal(coin.tickerId, 'ethereum');
       });
-      Tweets.emitCoin('TEST');
+      Tweets.emitCoin('ETH', 'ethereum');
     });
   });
 });

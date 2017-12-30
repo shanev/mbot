@@ -34,7 +34,7 @@ client.stream('statuses/filter', {follow: '961445378'}, (stream) => {
         const tickerId = await CoinMktCapApi.findTickerIdBySymbol(symbol);
         if (tickerId != null) {
           console.log('https://coinmarketcap.com/currencies/${tickerId}');
-          emitCoin(symbol);
+          emitCoin(symbol, tickerId);
           await Bittrex.buy(symbol, parseFloat(tradePice));
         } else {
           console.log('Not listed on CoinMarketCap.');
@@ -49,8 +49,8 @@ client.stream('statuses/filter', {follow: '961445378'}, (stream) => {
   });
 });
 
-function emitCoin(symbol) {
-  coinEmitter.emit('data', symbol);  
+function emitCoin(symbol, tickerId) {
+  coinEmitter.emit('data', { symbol, tickerId });  
 }
 
 function imageUrl(tweet) {
