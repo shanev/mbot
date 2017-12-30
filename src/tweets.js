@@ -1,8 +1,9 @@
 require('dotenv').config();
 
-const Twitter = require('twitter');
-const CoinMktCapApi = require('./coinmktcap');
 const Bittrex = require('./bittrex');
+const CoinMktCapApi = require('./coinmktcap');
+const EventEmitter = require('events');
+const Twitter = require('twitter');
 const Vision = require('./vision');
 
 const client = new Twitter({
@@ -13,20 +14,15 @@ const client = new Twitter({
 });
 
 const tradePrice = process.env.TRADE_PRICE || process.argv[2];
-
 if (tradePrice == undefined) {
   console.log('Missing argument: trade price.');
   process.exit();
 }
 
-// client.get('statuses/show', { id: '945655402276024320' }, (error, tweet) => {
-//   if (!error) {
-//     console.log(tweet.entities);
-//   } else {
-//     console.error(error);
-//   }
-// });
+class CoinEmitter extends EventEmitter { }
+const coinEmitter = new CoinEmitter();
 
+// Consume the tweet stream and fire events
 client.stream('statuses/filter', {follow: '961445378'}, (stream) => {
   stream.on('data', async (tweet) => {
     if (coinOfTheWeek(tweet) == true) {
@@ -38,6 +34,7 @@ client.stream('statuses/filter', {follow: '961445378'}, (stream) => {
         const tickerId = await CoinMktCapApi.findTickerIdBySymbol(symbol);
         if (tickerId != null) {
           console.log('https://coinmarketcap.com/currencies/${tickerId}');
+          emitCoin(symbol);
           await Bittrex.buy(symbol, parseFloat(tradePice));
         } else {
           console.log('Not listed on CoinMarketCap.');
@@ -51,6 +48,10 @@ client.stream('statuses/filter', {follow: '961445378'}, (stream) => {
     console.log(error);
   });
 });
+
+function emitCoin(symbol) {
+  coinEmitter.emit('data', symbol);  
+}
 
 function imageUrl(tweet) {
   const media = tweet.entities.media;
@@ -85,4 +86,4 @@ function isReply(tweet) {
   return false;
 }
 
-module.exports = { coinOfTheWeek, imageUrl };
+module.exports = { coinOfTheWeek, imageUrl, coinEmitter, emitCoin };

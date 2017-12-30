@@ -35,4 +35,14 @@ describe('Tweets', () => {
       assert.equal(url, null);
     });
   });
+
+  describe('emitCoin()', () => {
+    it('should emit a symbol', () => {
+      const coinEmitter = Tweets.coinEmitter;
+      coinEmitter.on('data', (coin) => {
+        assert.equal(coin, 'TEST');
+      });
+      Tweets.emitCoin('TEST');
+    });
+  });
 });
