@@ -25,8 +25,8 @@ const coinEmitter = new CoinEmitter();
 // Consume the tweet stream and fire events
 client.stream('statuses/filter', {follow: '961445378'}, (stream) => {
   stream.on('data', async (tweet) => {
-    if (coinOfTheWeek(tweet) == true) {
-      const imageUrl = imageUrl(tweet);
+    if (_coinOfTheWeek(tweet) == true) {
+      const imageUrl = _imageUrl(tweet);
       const vision = new Vision(imageUrl);
       const symbol = await vision.detectSymbol();
       if (symbol != null) {
@@ -34,7 +34,7 @@ client.stream('statuses/filter', {follow: '961445378'}, (stream) => {
         const tickerId = await CoinMktCapApi.findTickerIdBySymbol(symbol);
         if (tickerId != null) {
           console.log('https://coinmarketcap.com/currencies/${tickerId}');
-          emitCoin(symbol, tickerId);
+          _emitCoin(symbol, tickerId);
           await Bittrex.buy(symbol, parseFloat(tradePice));
         } else {
           console.log('Not listed on CoinMarketCap.');
@@ -45,15 +45,15 @@ client.stream('statuses/filter', {follow: '961445378'}, (stream) => {
   });
 
   stream.on('error', (error) => {
-    console.log(error);
+    console.error(error);
   });
 });
 
-function emitCoin(symbol, tickerId) {
+function _emitCoin(symbol, tickerId) {
   coinEmitter.emit('data', { symbol, tickerId });  
 }
 
-function imageUrl(tweet) {
+function _imageUrl(tweet) {
   const media = tweet.entities.media;
   if (media.length > 0) {
     return media[0].media_url;
@@ -62,8 +62,8 @@ function imageUrl(tweet) {
   }
 }
 
-function coinOfTheWeek(tweet) {
-  if (isReply(tweet) == false) {
+function _coinOfTheWeek(tweet) {
+  if (_isReply(tweet) == false) {
     console.log(tweet.text);
     const lowercaseTweet = tweet.text.toLowerCase();
     if (lowercaseTweet.includes('coin of the week')) {
@@ -74,7 +74,7 @@ function coinOfTheWeek(tweet) {
 }
 
 // Filter out reply tweets
-function isReply(tweet) {
+function _isReply(tweet) {
   if ( tweet.retweeted_status
     || tweet.in_reply_to_status_id
     || tweet.in_reply_to_status_id_str
@@ -86,4 +86,8 @@ function isReply(tweet) {
   return false;
 }
 
-module.exports = { coinOfTheWeek, imageUrl, coinEmitter, emitCoin };
+if (process.env.NODE_ENV != 'test') {
+  module.exports = { coinEmitter };
+} else {
+  module.exports = { coinEmitter, _coinOfTheWeek, _imageUrl, _emitCoin };  
+}

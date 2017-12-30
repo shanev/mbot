@@ -14,36 +14,36 @@ describe('Tweets', () => {
     entities: { media: [] }
   }
 
-  describe('coinOfTheWeek()', () => {
+  describe('_coinOfTheWeek()', () => {
     it('should return true', () => {
-      assert(Tweets.coinOfTheWeek(tweet));
+      assert(Tweets._coinOfTheWeek(tweet));
     });
 
     it('should return false', () => {
-      assert(Tweets.coinOfTheWeek(badTweet) == false);
+      assert(Tweets._coinOfTheWeek(badTweet) == false);
     });
   });
 
-  describe('imageUrl()', () => {
+  describe('_imageUrl()', () => {
     it('should return a url for tweet', () => {
-      const url = Tweets.imageUrl(tweet);
+      const url = Tweets._imageUrl(tweet);
       assert.equal(url, 'http://pbs.twimg.com/media/DR-kkH4XcAAQ-vc.jpg');
     });
 
     it('should return null for bad tweet', () => {
-      const url = Tweets.imageUrl(badTweet);
+      const url = Tweets._imageUrl(badTweet);
       assert.equal(url, null);
     });
   });
 
-  describe('emitCoin()', () => {
+  describe('CoinEmitter', () => {
     it('should emit a symbol', () => {
       const coinEmitter = Tweets.coinEmitter;
       coinEmitter.on('data', (coin) => {
         assert.equal(coin.symbol, 'ETH');
         assert.equal(coin.tickerId, 'ethereum');
       });
-      Tweets.emitCoin('ETH', 'ethereum');
+      Tweets._emitCoin('ETH', 'ethereum');
     });
   });
 });
