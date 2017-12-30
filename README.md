@@ -39,3 +39,17 @@ Buy $100 USD of tweeted symbol on Bittrex. Make sure you have sufficient BTC or 
 McAfee mentioned BTC.
 https://coinmarketcap.com/currencies/bitcoin
 ```
+
+## Advanced
+
+MBot emits an event with the coin symbol and `tickerId` when it detects a new coin of the week. `tickerId` can be used to construct a coinmarketcap.com URL.
+
+Usage:
+
+```
+const coinEmitter = Tweets.coinEmitter;
+coinEmitter.on('data', (coin) => {
+    console.log(coin.symbol);
+    console.log(coin.tickerId); // https://coinmarketcap.com/currencies/[tickerId]
+});
+```
