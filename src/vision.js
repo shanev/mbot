@@ -9,7 +9,6 @@ fs.writeFile(keyFilename, googleKey, (err) => {
   if (err) {
     console.error(err);
   }
-  console.log('Wrote keyfile!');
 });
 
 // Creates a client
