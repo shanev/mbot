@@ -30,10 +30,10 @@ client.stream('statuses/filter', {follow: '961445378'}, (stream) => {
       const vision = new Vision(imageUrl);
       const symbol = await vision.detectSymbol();
       if (symbol != null) {
-        console.log('Coin of the week: ${symbol}.');
+        console.log(`Coin of the week: ${symbol}.`);
         const tickerId = await CoinMktCapApi.findTickerIdBySymbol(symbol);
         if (tickerId != null) {
-          console.log('https://coinmarketcap.com/currencies/${tickerId}');
+          console.log(`https://coinmarketcap.com/currencies/${tickerId}`);
           _emitCoin(symbol, tickerId);
           await Bittrex.buy(symbol, parseFloat(tradePice));
         } else {
