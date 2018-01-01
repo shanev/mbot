@@ -3,8 +3,8 @@ const CoinMktCapApi = require('../src/coinmktcap');
 
 describe('CoinMarketCap API', () => {
   describe('findTickerIdBySymbol', () => {
-    it('should find ticker id for BTC', async () => {
-      assert.equal(await CoinMktCapApi.findTickerIdBySymbol('BTC'), 'bitcoin');
+    it('should find ticker id for FTC', async () => {
+      assert.equal(await CoinMktCapApi.findTickerIdBySymbol('FCT'), 'factom');
     }).timeout(5000);
 
     it('should not find ticker id for SHANE', async () => {
