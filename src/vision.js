@@ -21,9 +21,9 @@ class Vision {
 
   async detectSymbol() {
     const text = await this._detectText();
-    const match = text.match(/[A-Z0-9]{3,5}/);
+    const match = text.match(/\(([^\)]+)\)/);
     if (match != null) {
-      return match[0];
+      return match[0].slice(1,-1);
     } else {
       return null;
     }
