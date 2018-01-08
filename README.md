@@ -53,3 +53,33 @@ coinEmitter.on('data', (coin) => {
     console.log(coin.tickerId); // https://coinmarketcap.com/currencies/[tickerId]
 });
 ```
+
+## Tests
+
+`npm test`
+
+```
+  CoinMarketCap API
+    findTickerIdBySymbol
+      ✓ should find ticker id for FTC (229ms)
+      ✓ should not find ticker id for SHANE (169ms)
+
+  Tweets
+    _coinOfTheWeek()
+      ✓ should return true
+      ✓ should return false
+    _imageUrl()
+      ✓ should return a url for tweet
+      ✓ should return null for bad tweet
+    CoinEmitter
+      ✓ should emit a symbol
+
+  Vision
+    detectSymbol
+      ✓ should detect symbol for TRON (1263ms)
+      ✓ should detect symbol for Factom (1288ms)
+      ✓ should detect symbol for Dodge (986ms)
+
+
+  10 passing (4s)
+```
